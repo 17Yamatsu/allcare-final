@@ -15,9 +15,9 @@ function normalizeDate(value) {
 router.get("/", async (_req, res) => {
   try {
     const [usuarios] = await db.query(
-      `SELECT usr_id, usr_name, usr_mail, usr_birthday, usr_cpf, usr_address_state,
-              usr_address_city, usr_adress_streetname, usr_adress_cep, usr_address_number,
-              usr_address_neighborhood, usr_pwd, tipo_usuario, telefone, criado_em
+      `SELECT usr_id, usr_name, usr_email, usr_birthday, usr_cpf, usr_estado,
+              usr_cidade, usr_rua, usr_cep, usr_numero,
+              usr_complemento, usr_bairro, usr_pwd, tipo_usuario, criado_em
        FROM usuario
        ORDER BY usr_id DESC`
     );
@@ -31,13 +31,14 @@ router.get("/", async (_req, res) => {
 router.post("/", async (req, res) => {
   try {
     const data = req.body || {};
+    console.log("Dados recebidos para criação/atualização de usuário:", data);
     const nome = data.nome || data.usr_name || "Usuário AllCare";
-    const email = data.email || data.usr_mail;
+    const email = data.email || data.usr_email;
     const senha = data.senha || data.usr_pwd;
 
-    if (!email || !senha) {
-      return res.status(400).json({ message: "E-mail e senha são obrigatórios." });
-    }
+    // if (!email || !senha) {
+    //   return res.status(400).json({ message: "E-mail e senha são obrigatórios." });
+    // }
 
     const params = {
       nome,
@@ -45,37 +46,35 @@ router.post("/", async (req, res) => {
       senha,
       dataNascimento: normalizeDate(data.dataNascimento || data.usr_birthday),
       cpf: data.cpf || data.usr_cpf || "",
-      estado: data.estado || data.usr_address_state || "SP",
-      cidade: data.cidade || data.usr_address_city || "",
-      endereco: data.endereco || data.usr_adress_streetname || "",
-      cep: data.cep || data.usr_adress_cep || "",
-      numero: data.numero || data.usr_address_number || "",
-      tipoEndereco: data.tipoEndereco || data.usr_address_type || "Casa",
-      bairro: data.bairro || data.usr_address_neighborhood || "",
+      estado: data.estado || data.usr_estado || "SP",
+      cidade: data.cidade || data.usr_cidade || "",
+      endereco: data.endereco || data.usr_rua || data.usr_adress_streetname || "",
+      cep: data.cep || data.usr_cep || data.usr_adress_cep || "",
+      numero: data.numero || data.usr_numero || data.usr_address_number || "",
+      complemento: data.complemento || data.usr_complemento || "",
+      bairro: data.bairro || data.usr_bairro || data.usr_address_neighborhood || "",
       tipoUsuario: data.tipoUsuario || data.tipo_usuario || "contratante",
-      telefone: data.telefone || "",
     };
 
     const [result] = await db.query(
       `INSERT INTO usuario
-        (usr_name, usr_mail, usr_birthday, usr_cpf, usr_address_country, usr_address_state,
-         usr_address_city, usr_adress_streetname, usr_adress_cep, usr_address_number,
-         usr_address_type, usr_address_neighborhood, usr_pwd, tipo_usuario, telefone)
-       VALUES (?, ?, ?, ?, 'Brasil', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        (usr_name, usr_email, usr_birthday, usr_cpf, usr_estado,
+         usr_cidade, usr_rua, usr_cep, usr_numero,
+         usr_complemento, usr_bairro, usr_pwd, tipo_usuario)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
        ON DUPLICATE KEY UPDATE
          usr_name = VALUES(usr_name),
          usr_birthday = VALUES(usr_birthday),
          usr_cpf = VALUES(usr_cpf),
-         usr_address_state = VALUES(usr_address_state),
-         usr_address_city = VALUES(usr_address_city),
-         usr_adress_streetname = VALUES(usr_adress_streetname),
-         usr_adress_cep = VALUES(usr_adress_cep),
-         usr_address_number = VALUES(usr_address_number),
-         usr_address_type = VALUES(usr_address_type),
-         usr_address_neighborhood = VALUES(usr_address_neighborhood),
+         usr_estado = VALUES(usr_estado),
+         usr_cidade = VALUES(usr_cidade),
+         usr_rua = VALUES(usr_rua),
+         usr_cep = VALUES(usr_cep),
+         usr_numero = VALUES(usr_numero),
+         usr_complemento = VALUES(usr_complemento),
+         usr_bairro = VALUES(usr_bairro),
          usr_pwd = VALUES(usr_pwd),
-         tipo_usuario = VALUES(tipo_usuario),
-         telefone = VALUES(telefone)`,
+         tipo_usuario = VALUES(tipo_usuario)`,
       [
         params.nome,
         params.email,
@@ -86,11 +85,10 @@ router.post("/", async (req, res) => {
         params.endereco,
         params.cep,
         params.numero,
-        params.tipoEndereco,
+        params.complemento,
         params.bairro,
         params.senha,
         params.tipoUsuario,
-        params.telefone,
       ]
     );
 
@@ -116,9 +114,9 @@ router.post("/login", async (req, res) => {
     }
 
     const [usuarios] = await db.query(
-      `SELECT usr_id, usr_name, usr_mail, tipo_usuario, telefone
+      `SELECT usr_id, usr_name, usr_email, tipo_usuario
        FROM usuario
-       WHERE LOWER(usr_mail) = LOWER(?) AND usr_pwd = ?
+       WHERE LOWER(usr_email) = LOWER(?) AND usr_pwd = ?
        LIMIT 1`,
       [email, senhaDigitada]
     );

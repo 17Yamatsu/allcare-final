@@ -154,9 +154,9 @@ router.post("/familiares", async (req, res) => {
     if (!required(res, ["nome", "parentesco"], data)) return;
 
     const [result] = await db.query(
-      `INSERT INTO familiares (usuario_id, nome, parentesco, telefone, email, observacoes)
-       VALUES (?, ?, ?, ?, ?, ?)`,
-      [data.usuario_id || null, data.nome, data.parentesco, data.telefone || "", data.email || "", data.observacoes || ""]
+      `INSERT INTO familiares (usuario_id, nome, parentesco, email, observacoes)
+       VALUES (?, ?, ?, ?, ?)`,
+      [data.usuario_id || null, data.nome, data.parentesco, data.email || "", data.observacoes || ""]
     );
 
     res.status(201).json({ message: "Familiar cadastrado com sucesso.", id: result.insertId });

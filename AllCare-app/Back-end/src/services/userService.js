@@ -4,26 +4,25 @@ import connection from '../config/db.js'
 export const createUser = (data, res) => {
   const sql = `
     INSERT INTO usuario 
-    (usr_name, usr_mail, usr_birthday, usr_cpf,
-     usr_address_country, usr_address_state, usr_address_city,
-     usr_adress_streetname, usr_adress_cep, usr_address_number,
-     usr_address_type, usr_address_neighborhood, usr_pwd)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+    (usr_name, usr_email, usr_birthday, usr_cpf,
+     usr_estado, usr_cidade,
+     usr_rua, usr_cep, usr_numero,
+     usr_complemento, usr_bairro, usr_pwd)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
   const values = [
     data.usr_name,
-    data.usr_mail,
+    data.usr_email,
     data.usr_birthday,
     data.usr_cpf,
-    data.usr_address_country,
-    data.usr_address_state,
-    data.usr_address_city,
-    data.usr_adress_streetname,
-    data.usr_adress_cep,
-    data.usr_address_number,
-    data.usr_address_type || "Casa",
-    data.usr_address_neighborhood,
+    data.usr_estado,
+    data.usr_cidade,
+    data.usr_rua,
+    data.usr_cep,
+    data.usr_numero,
+    data.usr_complemento,
+    data.usr_bairro,
     data.usr_pwd 
 ];
 
