@@ -64,7 +64,7 @@ function Card({ icon, title, onPress, highlighted }) {
       ]}
       >
         {/*<Image style={styles.cardIcon} source={isImage ? icon : undefined} />*/}
-        <FontAwesome6 name={icon} size={62} color="white" style={{marginBottom: 12}}/>
+        <FontAwesome6 name={icon} size={62} color="black" style={{marginBottom: 12}}/>
       <Text style={[styles.cardText, highlighted && styles.cardTextHighlighted]}>{title}</Text>
     </Pressable>
 
@@ -74,19 +74,19 @@ function Card({ icon, title, onPress, highlighted }) {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: "rgb(32,99,149)" },
   container: { paddingBottom: 110 },
-  header: { backgroundColor: "#272727", borderBottomLeftRadius: 22, borderBottomRightRadius: 22, padding: 24, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  logo: { fontSize: 38, fontWeight: "bold", color: "#74bef7" },
-  subtitle: { color: "#74bef7" },
-  userText: { color: "#ffffff", marginTop: 8, fontSize: 18},
-  userTextBold: { fontWeight: "bold", color: "#fff", fontSize: 20 },
+  header: { backgroundColor: "#ffffff", borderBottomLeftRadius: 22, borderBottomRightRadius: 22, padding: 24, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
+  logo: { fontSize: 38, fontWeight: "bold", color: "#1d9afa" },
+  subtitle: { color: "#0091ff" },
+  userText: { color: "#000000", marginTop: 8, fontSize: 18},
+  userTextBold: { fontWeight: "bold", color: "#000000", fontSize: 20 },
   avatar: { width: 86, height: 86, borderRadius: 28, backgroundColor: "#3d3d3d", alignItems: "center", justifyContent: "center" },
   avatarText: { fontSize: 24 },
   grid: { padding: 24, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", gap: 16 },
-  card: { backgroundColor: "#272727", width: "46%", minHeight: 130, borderRadius: 18, alignItems: "center", justifyContent: "center", padding: 12, shadowColor: "#000", shadowOpacity: 0.08, shadowRadius: 8, elevation: 3, cursor: "pointer" },
+  card: { backgroundColor: "#ffffff", width: "46%", minHeight: 130, borderRadius: 18, alignItems: "center", justifyContent: "center", padding: 12, shadowColor: "#000", shadowOpacity: 0.08, shadowRadius: 8, elevation: 3, cursor: "pointer" },
   cardPressed: { opacity: 0.75, transform: [{ scale: 0.99 }] },
   cardHighlighted: { borderWidth: 3, borderColor: "#2563EB" },
   cardIcon: { height: 100, width: 100,  },
-  cardText: { textAlign: "center", color: "#ffffff", fontWeight: "bold", fontSize: 15 },
+  cardText: { textAlign: "center", color: "#000000", fontWeight: "bold", fontSize: 15 },
   cardTextHighlighted: { color: "#2563EB" },
   bottomTab: { position: "absolute", bottom: 2, left: 2, right: 2, borderRadius: 22, paddingVertical: 12, flexDirection: "row", justifyContent: "space-around" },
   bottomButton: { padding: 10 },

@@ -15,9 +15,9 @@ import ProCard from "../components/CardHome";
 import { FontAwesome6 } from "@expo/vector-icons";
 
 const prof = [
-    {id: 1, name: 'Ana Clara', photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Serinus_canaria_-Parque_Rural_del_Nublo%2C_Gran_Canaria%2C_Spain_-male-8a.jpg/1920px-Serinus_canaria_-Parque_Rural_del_Nublo%2C_Gran_Canaria%2C_Spain_-male-8a.jpg', spec: ['Enfermeira de Idosos', 'Cuidados Paliativos']},
-    {id: 2, name: 'Pedro Silva', photo: 'https://picsum.photos/201', spec: ['Enfermeiro Infantil', 'Cuidador de PCD Infantil']},
-    {id: 3, name: 'Marina Carla', photo: 'https://picsum.photos/202', spec: ['Idosos e PCD Adulto', 'Cuidadora de Idosos']},
+    {id: 1, name: 'Amanda Abreu', photo: require('../images/moça2.avif'), spec: ['Enfermeira de Idosos', 'Cuidados Paliativos']},
+    {id: 2, name: 'Pedro Cipoli', photo: require('../images/moço3.jpg'), spec: ['Enfermeiro Infantil', 'Cuidador de PCD Infantil']},
+    {id: 3, name: 'Adriano Ponte', photo: require('../images/moço1.jpeg'), spec: ['Idosos e PCD Adulto', 'Cuidador de Idosos']},
 ]
 
 export default function NewHome({navigation, route}) {
@@ -30,24 +30,23 @@ export default function NewHome({navigation, route}) {
 return(
 <SafeAreaView style={stylesi.base}>
     <ScrollView contentContainerStyle={{flexGrow:1}}>
-          <View style={stylesi.header}>
+          
           <View style={styles.header}>
             <View>
           <TouchableOpacity style={styles.voltar} onPress={() => navigation.navigate("Home", { user })}>
-            <FontAwesome6 name="arrow-left" size={16} color="white" /> <Text style={styles.voltarTexto}>Voltar</Text>
+            <FontAwesome6 name="arrow-left" size={16} color="black" /> <Text style={styles.voltarTexto}>Voltar</Text>
           </TouchableOpacity>
           <Text style={styles.logo}>AllCare</Text>
-          <Text style={styles.subtitle}>Cuidando de quem você ama</Text>
-          
-          <TouchableOpacity onPress={() => navigation.navigate("Profile", { user })}>
-            <Text style={styles.userText}>Olá, <Text style={styles.userTextBold}>{user?.usr_name || "Usuário Teste"}</Text></Text>
-          </TouchableOpacity>
-          </View> 
-          <TouchableOpacity onPress={() => navigation.navigate("Profile", { user })}>
-          <View style={styles.avatar}><Text style={styles.avatarText}>👤</Text></View>
-        </TouchableOpacity>
+                      <Text style={styles.subtitle}>Cuidando de quem você ama</Text>
+                      <TouchableOpacity onPress={() => navigation.navigate("Profile", { user })}>
+                          <Text style={styles.userText}>Olá, <Text style={styles.userTextBold}>{user?.usr_name || "Usuário Teste"}</Text></Text>
+                      </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity onPress={() => navigation.navigate("Profile", { user })}>
+                      <View style={styles.avatar}><FontAwesome6 name="user" size={24} color="white" /></View>
+                </TouchableOpacity>
         </View>
-        </View>
+      
         
         <View style={stylesi.scrcontent}>
            <FlatList
@@ -78,16 +77,18 @@ const stylesi = StyleSheet.create({
 
         margin: 12,
         height: '20%',
-        backgroundColor: '#27272725',
+        backgroundColor: 'white',
         oppacity: 0.8,
         borderRadius: 20,
     },
     scrcontent: {
-        backgroundColor: '#272727',
+        paddingTop: 22,
+        backgroundColor: 'white',
         fontSize: 15,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        padding: 8,
+        paddingLeft: 58,
+        paddingRight: 58,
         flex: 1,
         minHeight: '100%',
         
@@ -120,12 +121,12 @@ function Card({ icon, title, onPress, highlighted }) {
 const styles = StyleSheet.create({
   screen: { flex: 1, backgroundColor: "#85CEF5" },
   container: { paddingBottom: 110 },
-  header: { height: '100%', backgroundColor: "#272727", borderRadius: 22, padding: 24, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
-  logo: { fontSize: 38, fontWeight: "bold", color: "#74bef7" },
-  subtitle: { color: "#74bef7" },
-  userText: { color: "#ffffff", marginTop: 8, fontSize: 18},
-  userTextBold: { fontWeight: "bold", color: "#fff", fontSize: 20 },
-  avatar: { width: 56, height: 56, borderRadius: 28, backgroundColor: "#E6F2FF", alignItems: "center", justifyContent: "center" },
+  header: { backgroundColor: "white", borderBottomLeftRadius: 22, borderBottomRightRadius: 22, padding: 24, flexDirection: "row", justifyContent: "space-between", alignItems: "center", marginBottom: 22 },
+  logo: { fontSize: 38, fontWeight: "bold", color: "#1d9afa" },
+  subtitle: { color: "#0091ff" },
+  userText: { color: "#000000", marginTop: 8, fontSize: 18},
+  userTextBold: { fontWeight: "bold", color: "#000000", fontSize: 20 },
+  avatar: { width: 86, height: 86, borderRadius: 28, backgroundColor: "#3d3d3d", alignItems: "center", justifyContent: "center" },  
   avatarText: { fontSize: 24 },
   grid: { padding: 24, flexDirection: "row", flexWrap: "wrap", justifyContent: "space-between", gap: 16 },
   card: { width: "46%", minHeight: 130, backgroundColor: "#fff", borderRadius: 18, alignItems: "center", justifyContent: "center", padding: 12, shadowColor: "#000", shadowOpacity: 0.08, shadowRadius: 8, elevation: 3, cursor: "pointer" },
@@ -149,7 +150,7 @@ const styles = StyleSheet.create({
   },
 voltarTexto: {
     fontSize: 20,
-    color: "white",
+    color: "black",
     fontWeight: "bold",
   },
 });
