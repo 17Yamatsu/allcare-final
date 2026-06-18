@@ -47,21 +47,6 @@ export default function HomeScreen({ navigation, route }) {
           <Card icon="people-roof" title="FAMÍLIA" onPress={() => open("Family")} />
         </View>
       </ScrollView>
-
-      <View style={styles.bottomTab}>
-      <BlurView intensity={30} tint="light" style={styles.bottomTab}>
-  <TouchableOpacity onPress={() => navigation.navigate("Home")}>
-    <Text style={styles.bottomIcon}>🏠</Text>
-  </TouchableOpacity>
-  <TouchableOpacity onPress={() => navigation.navigate("MyAppointments")}>
-    <Text style={styles.bottomIcon}>📋</Text>
-  </TouchableOpacity>
-
-  <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
-    <Text style={styles.bottomIcon}>👤</Text>
-  </TouchableOpacity>
-</BlurView>
-</View>
     </SafeAreaView>
   );
 }

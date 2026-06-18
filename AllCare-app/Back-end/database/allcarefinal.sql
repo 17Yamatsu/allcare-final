@@ -1,94 +1,101 @@
-CREATE TABLE `usuario` (
-  `usr_id` int NOT NULL AUTO_INCREMENT,
-  `usr_name` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `usr_mail` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `usr_birthday` date NOT NULL,
-  `usr_cpf` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `usr_address` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `usr_cep` varchar(8) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `usr_type` enum('Paciente','Usuário') COLLATE utf8mb4_unicode_ci DEFAULT 'Usuário',
-  `usr_pwd` varchar(16) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `usr_photo` mediumblob,
-  `usr_medicalinfo` varchar(700) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_usuario` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT 'contratante',
-  `criado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`usr_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+CREATE DATABASE IF NOT EXISTS allcare CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE allcare;
 
-CREATE TABLE `paciente` (
-  `pac_id` int NOT NULL AUTO_INCREMENT,
-  `pac_name` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pac_address` varchar(300) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pac_cpf` varchar(11) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `pac_birthday` date NOT NULL,
-  `pac_medicalinfo` varchar(700) COLLATE utf8mb4_unicode_ci NOT NULL,
-  PRIMARY KEY (`pac_id`)
+CREATE TABLE IF NOT EXISTS usuario (
+  usr_id INT AUTO_INCREMENT PRIMARY KEY,
+  usr_name VARCHAR(120) NOT NULL,
+  usr_email VARCHAR(150) NOT NULL UNIQUE,
+  usr_birthday DATE NULL,
+  usr_cpf VARCHAR(20) NULL,
+  usr_estado VARCHAR(2) NULL,
+  usr_cidade VARCHAR(120) NULL,
+  usr_rua VARCHAR(200) NULL,
+  usr_bairro VARCHAR(200) NULL,
+  usr_cep VARCHAR(20) NULL,
+  usr_numero VARCHAR(20) NULL,
+  usr_complemento VARCHAR(50) DEFAULT 'Casa',
+  usr_pwd VARCHAR(100) NOT NULL,
+  usr_photo MEDIUMBLOB NULL,
+  tipo_usuario VARCHAR(40) DEFAULT 'contratante',
+  -- telefone VARCHAR(30) NULL,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `pac_usr` (
-  `FK_usr` int NOT NULL,
-  `FK_pac` int NOT NULL,
-  PRIMARY KEY (`FK_usr`,`FK_pac`),
-  KEY `FK_pac` (`FK_pac`),
-  CONSTRAINT `pac_usr_ibfk_1`
-    FOREIGN KEY (`FK_usr`) REFERENCES `usuario` (`usr_id`),
-  CONSTRAINT `pac_usr_ibfk_2`
-    FOREIGN KEY (`FK_pac`) REFERENCES `paciente` (`pac_id`)
+CREATE TABLE IF NOT EXISTS mensagens_chat (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  autor VARCHAR(50) NOT NULL,
+  mensagem TEXT NOT NULL,
+  valor_negociado DECIMAL(10,2) NULL,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `mensagens_chat` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `autor` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mensagem` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `valor_negociado` decimal(10,2) DEFAULT NULL,
-  `criado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+
+CREATE TABLE IF NOT EXISTS chat_negociacao (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  autor VARCHAR(50) NOT NULL,
+  mensagem TEXT NOT NULL,
+  valor_negociado DECIMAL(10,2) NULL,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `historico_atendimentos` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `agendamento_id` int DEFAULT NULL,
-  `paciente` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cuidador` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data_atendimento` date NOT NULL,
-  `horario_inicio` time DEFAULT NULL,
-  `horario_fim` time DEFAULT NULL,
-  `procedimentos` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `observacoes` text COLLATE utf8mb4_unicode_ci,
-  `status` varchar(40) COLLATE utf8mb4_unicode_ci DEFAULT 'Concluído',
-  `criado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS agendamentos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NULL,
+  paciente VARCHAR(120) NOT NULL,
+  cuidador VARCHAR(120) NOT NULL,
+  especialidade VARCHAR(120) DEFAULT 'Cuidador domiciliar',
+  data_consulta DATE NOT NULL,
+  horario TIME NOT NULL,
+  endereco VARCHAR(255) NOT NULL,
+  observacoes TEXT NULL,
+  valor DECIMAL(10,2) DEFAULT 0,
+  status VARCHAR(40) DEFAULT 'Agendado',
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `familiares` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `usuario_id` int DEFAULT NULL,
-  `nome` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `parentesco` varchar(80) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `telefone` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `email` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `observacoes` text COLLATE utf8mb4_unicode_ci,
-  `criado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS historico_atendimentos (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  agendamento_id INT NULL,
+  paciente VARCHAR(120) NOT NULL,
+  cuidador VARCHAR(120) NOT NULL,
+  data_atendimento DATE NOT NULL,
+  horario_inicio TIME NULL,
+  horario_fim TIME NULL,
+  procedimentos TEXT NOT NULL,
+  observacoes TEXT NULL,
+  status VARCHAR(40) DEFAULT 'Concluído',
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `avaliacoes` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `atendimento_id` int DEFAULT NULL,
-  `agendamento_id` int DEFAULT NULL,
-  `avaliador` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cuidador` varchar(120) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nota` int NOT NULL,
-  `comentario` text COLLATE utf8mb4_unicode_ci,
-  `criado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS avaliacoes (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  atendimento_id INT NULL,
+  agendamento_id INT NULL,
+  avaliador VARCHAR(120) NOT NULL,
+  cuidador VARCHAR(120) NOT NULL,
+  nota INT NOT NULL,
+  comentario TEXT NULL,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `chat_negociacao` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `autor` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mensagem` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `valor_negociado` decimal(10,2) DEFAULT NULL,
-  `criado_em` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`)
+CREATE TABLE IF NOT EXISTS familiares (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  usuario_id INT NULL,
+  nome VARCHAR(120) NOT NULL,
+  parentesco VARCHAR(80) NOT NULL,
+  telefone VARCHAR(30) NULL,
+  email VARCHAR(150) NULL,
+  observacoes TEXT NULL,
+  criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+INSERT INTO usuario
+  (usr_name, usr_email, usr_birthday, usr_cpf, usr_estado,
+   usr_cidade, usr_rua, usr_cep, usr_numero,
+   usr_complemento, usr_bairro, usr_pwd, tipo_usuario)
+VALUES
+  ('Usuário Teste', 'teste@allcare.com', '2000-01-01', '00000000000', 'SP',
+   'Barueri', 'Rua Teste', '00000000', '100', 'Casa', 'Casa', '123456', 'contratante')
+ON DUPLICATE KEY UPDATE usr_pwd = VALUES(usr_pwd), tipo_usuario = VALUES(tipo_usuario);
+
+select * from usuario;

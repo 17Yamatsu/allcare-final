@@ -51,9 +51,7 @@ return(
         
         <View style={stylesi.scrcontent}>
            <FlatList
-           key={"cols-3"}
            data={prof}
-           numColumns={3}
            keyExtractor={(item) => item.id}
            renderItem={({item})=>
             <ProCard
@@ -89,9 +87,10 @@ const stylesi = StyleSheet.create({
         fontSize: 15,
         borderTopLeftRadius: 30,
         borderTopRightRadius: 30,
-        padding: 6,
+        padding: 8,
         flex: 1,
-        minHeight: '100%'
+        minHeight: '100%',
+        
     },
     imgstyle:{
         height: 160,

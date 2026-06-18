@@ -20,18 +20,19 @@ const stylish = StyleSheet.create({
         backgroundColor: 'rgb(255, 255, 255)',
         borderRadius: 20,
         alignItems: 'center',
-        margin: 8,
+        marginBottom: 12,
         flex: 1,
-        maxWidth: 175,
+        width: '100%',
     },
     img:{
-        width: 175,
+        
+        width: '100%',
         height: 165,
         borderRadius: 20,
         marginBottom: 8,
     },
     name:{
-        fontSize: 15,
+        fontSize: 20,
         fontWeight: 'bold',
         textAlign: 'center',
         color: 'black',
@@ -42,7 +43,7 @@ const stylish = StyleSheet.create({
         margin: 8
     },
     job: {
-        fontSize: 12,
+        fontSize: 18,
         color: 'gray',
         paddingHorizontal: 8
 
