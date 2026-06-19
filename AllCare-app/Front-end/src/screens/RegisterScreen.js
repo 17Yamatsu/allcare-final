@@ -46,7 +46,6 @@ export default function RegisterScreen({ navigation }) {
 
           <Field label="Nome completo" value={form.nome} onChangeText={(text) => update("nome", text)} />
           <Field label="E-mail" value={form.email} onChangeText={(text) => update("email", text)} keyboardType="email-address" autoCapitalize="none" />
-          <Field label="Telefone" value={form.telefone} onChangeText={(text) => update("telefone", text)} keyboardType="phone-pad" />
           <Field label="CPF" value={form.cpf} onChangeText={(text) => update("cpf", text)} />
           <Field label="Data de nascimento" placeholder="DD/MM/AAAA" value={form.dataNascimento} onChangeText={(text) => update("dataNascimento", text)} />
 

@@ -44,9 +44,6 @@ const user = route?.params?.user || { usr_id: null, usr_name: "Usuário Teste" }
         <Text style={styles.label}>E-mail</Text>
         <Text style={styles.valor}>{user?.usr_email || "teste@allcare.com"}</Text>
 
-        <Text style={styles.label}>Telefone</Text>
-        <Text style={styles.valor}>{user?.usr_phone || "(11) 99999-9999"}</Text>
-
         <Text style={styles.label}>Perfil</Text>
         <Text style={styles.valor}>{user?.usr_profile || "Contratante"}</Text>
       </View>
