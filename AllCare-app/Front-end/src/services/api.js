@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8001";
+const API_URL = "http://{API_HOST_IP}:8001";
 
 async function request(path, options = {}) {
   const response = await fetch(`${API_URL}${path}`, {

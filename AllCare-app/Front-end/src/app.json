@@ -4,10 +4,10 @@
     "slug": "AllCare-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./images/icon_agendar_nt.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./images/icon_agendar_nt.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,9 +17,9 @@
     "android": {
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/android-icon-foreground.png",
-        "backgroundImage": "./assets/android-icon-background.png",
-        "monochromeImage": "./assets/android-icon-monochrome.png"
+        "foregroundImage": "./images/icon_agendar_nt.png",
+        "backgroundImage": "./images/icon_agendar_nt.png",
+        "monochromeImage": "./images/icon_agendar_nt.png"
       }
     },
     "web": {
