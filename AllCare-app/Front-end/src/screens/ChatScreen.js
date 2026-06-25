@@ -128,7 +128,7 @@ function Choice({ selected, label, onPress }) {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: "#E6F2FF" },
+  screen: { flex: 1, backgroundColor: "#E6F2FF", padding: 10 },
   header: { backgroundColor: "#fff", padding: 18, flexDirection: "row", alignItems: "center", gap: 14, borderBottomLeftRadius: 18, borderBottomRightRadius: 18 },
   backButton: { width: 42, height: 42, borderRadius: 12, backgroundColor: "#E6F2FF", alignItems: "center", justifyContent: "center" },
   backText: { color: "#2563EB", fontSize: 28, fontWeight: "bold" },

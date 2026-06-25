@@ -72,6 +72,7 @@ const stylesi = StyleSheet.create({
         backgroundColor: 'rgb(32,99,149)',
         justifyContent:'center',
         flex: 1,
+        padding: 10,
     },
     header: {
 

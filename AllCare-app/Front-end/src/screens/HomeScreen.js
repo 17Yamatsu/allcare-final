@@ -72,7 +72,7 @@ function Card({ icon, title, onPress, highlighted }) {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: "rgb(32,99,149)" },
+  screen: { flex: 1, backgroundColor: "rgb(32,99,149)", padding: 10 },
   container: { paddingBottom: 110 },
   header: { backgroundColor: "#ffffff", borderBottomLeftRadius: 22, borderBottomRightRadius: 22, padding: 24, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   logo: { fontSize: 38, fontWeight: "bold", color: "#1d9afa" },

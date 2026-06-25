@@ -64,7 +64,7 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: "#E6F2FF", justifyContent: "center", padding: 20 },
+  screen: { flex: 1, backgroundColor: "#E6F2FF", justifyContent: "center", padding: 10 },
   card: { backgroundColor: "#fff", borderRadius: 28, padding: 24, shadowColor: "#000", shadowOpacity: 0.08, shadowRadius: 12, elevation: 4 },
   logo: { fontSize: 42, fontWeight: "bold", color: "#24577D", textAlign: "center" },
   subtitle: { color: "#24577D", textAlign: "center", marginBottom: 30 },

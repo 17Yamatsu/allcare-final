@@ -84,7 +84,7 @@ export default function CreatePasswordScreen({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  screen: { flex: 1, backgroundColor: "#E6F2FF" },
+  screen: { flex: 1, backgroundColor: "#E6F2FF", padding: 10 },
   container: { padding: 20, paddingBottom: 40 },
   backButton: { marginBottom: 12 },
   backText: { color: "#2563EB", fontWeight: "bold" },

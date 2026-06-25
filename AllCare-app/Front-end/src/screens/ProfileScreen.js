@@ -4,6 +4,7 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Image,
 } from "react-native";
 
 export default function ProfileScreen({ navigation, route }) {
@@ -29,7 +30,7 @@ const user = route?.params?.user || { usr_id: null, usr_name: "Usuário Teste" }
 
       <View style={styles.cardPerfil}>
         <View style={styles.avatar}>
-          <Text style={styles.avatarTexto}>👤</Text>
+          <Image source={require("../images/perfil.png")} style={styles.avatarImage} />
         </View>
 
         <Text style={styles.nome}>{user?.usr_name || "Usuário Teste"}</Text>
@@ -50,7 +51,7 @@ const user = route?.params?.user || { usr_id: null, usr_name: "Usuário Teste" }
 
       <TouchableOpacity
         style={styles.botaoHome}
-        onPress={() => navigation.navigate("Home")}
+        onPress={() => navigation.navigate("Home", { user })}
       >
         <Text style={styles.textoBotao}>Voltar para Home</Text>
       </TouchableOpacity>
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#85CEF5",
+    padding: 10,
   },
 
   header: {
@@ -172,5 +174,10 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "bold",
     fontSize: 16,
+  },
+  avatarImage: {
+    width: 90,
+    height: 90,
+    borderRadius: 45,
   },
 });

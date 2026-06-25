@@ -4,8 +4,8 @@
     "slug": "AllCare-app",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./images/icon_agendar_nt.png",
-    "userInterfaceStyle": "light",
+    "icon": "./images/logo.jpg",
+    "userInterfaceStyle": "dark",
     "splash": {
       "image": "./images/icon_agendar_nt.png",
       "resizeMode": "contain",
